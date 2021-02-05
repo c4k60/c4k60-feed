@@ -72,7 +72,7 @@ $stmt->close();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
+<link rel="icon" type="image/png" href="/c4k60.png">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
     <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -83,7 +83,7 @@ $stmt->close();
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Login #8</title>
+    <title>Đăng nhập vào C4K60</title>
   </head>
   <body>
   

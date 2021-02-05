@@ -18,7 +18,7 @@ if (!isset($_SESSION['loggedin'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
+<link rel="icon" type="image/png" href="/c4k60.png">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
     <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -29,7 +29,7 @@ if (!isset($_SESSION['loggedin'])) {
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Login #8</title>
+    <title>Đăng ký tài khoản C4K60</title>
   </head>
   <body>
   
@@ -45,7 +45,7 @@ if (!isset($_SESSION['loggedin'])) {
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
-              <h3>Đăng nhập vào <strong>C4K60</strong></h3>
+              <h3>Đăng ký tài khoản <strong>C4K60</strong></h3>
               <p class="mb-4">Mạng xã hội hàng đầu THPT Chuyên Biên Hoà. Thật đó ahihi :))</p>
             </div>
             <form action="register.php" method="POST">

@@ -39,7 +39,7 @@ $conn->query($sql);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/vi.min.js"></script>
-
+<link rel="icon" type="image/png" href="c4k60.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -98,7 +98,7 @@ $conn->query($sql);
     <img src="/images/tunna.jpg" onclick="profileDropdown()" class="dropbtn" alt="Logo" style="width:40px;border-radius: 50%;margin-left: 10px;cursor: pointer;">
   </a>
 <div id="myDropdowns" class="dropdown-content">
-    <a href="profile.php?user=<?php echo $_SESSION['username'] ?>"><i class="fas fa-user-circle" style="margin-right: 6px;"></i> Trang cá nhân</a>
+    <a href="/<?php echo $_SESSION['username'] ?>"><i class="fas fa-user-circle" style="margin-right: 6px;"></i> Trang cá nhân</a>
     <a href="#about"><i class="fas fa-cog" style="margin-right: 6px;"></i> Cài đặt</a>
     <a href="logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 6px;"></i> Đăng xuất</a>
   </div>

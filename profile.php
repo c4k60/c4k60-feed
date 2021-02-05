@@ -1,4 +1,20 @@
+<?php
+// We need to use sessions, so you should always start sessions using the below code.
+session_start();
+    // If the user is not logged in redirect to the login page...
+if (!isset($_SESSION['loggedin'])) {
+  $edit = 'none';
+} else {
+$edit = 'block';
+if ($_SESSION['username'] == str_replace("/","",$_SERVER['REQUEST_URI'])) {
+  $edit = 'block';
+} else {
+  $edit = 'none';
+}
+}
 
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +31,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/vi.min.js"></script>
-
+<link rel="icon" type="image/png" href="c4k60.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <style type="text/css">
@@ -53,38 +69,95 @@
   </a>
 </ul>
 </nav>
-
 <?php
 $content = "none";
+$back = 'block';
 require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
 if (isset($_GET['username'])) {
 $username = $_GET['username'];
-$sql = "SELECT name, email, profile_pic, cover_pic, date, verified, permission FROM accounts WHERE username='$username'";
+$sql = "SELECT name, email, about, has_cover, profile_pic, other_name, cover_pic, date, verified, permission FROM accounts WHERE username='$username'";
 $result = $conn->query($sql);
+
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
+    if (empty($row['other_name'])) {
+      $other_name = 'none';
+    } else {
+      $other_name = 'inline-block';
+    }
+    if ($row['verified'] == 'yes') {
+      $is_veri = 'inline';
+    } else {
+      $is_veri = 'none';
+    }
+    
+
+$back_height = 545;
+if ($edit == 'none') {
+$back_height = 520;
+} 
+if (empty($row['about'])) {
+      $back_height = 490;
+    }
+    if (empty($row['about']) && $edit == 'block') {
+$back_height = 520;
+    }
 ?>
+<div style="display: <?php echo $back; ?>;background-color: white;width:100%;height: <?php echo $back_height ?>px;position: absolute;z-index: -3;    -webkit-box-shadow: 0px 0px 3px -1px rgb(0 0 0 / 75%);">
+<img src="/images/black_fade.png" style="width: 100%;height:300px;position: absolute;z-index: -3;">
+</div>
 <div class="content" style="
     margin-top: 50px;
     margin-bottom: 65px;
 ">
 <div style="position:relative">
-<img src="<?php echo $row['cover_pic'] ?>" alt="Logo" style="object-fit: cover;
+  <img src="/images/gray.jpg" style="object-fit: cover;
+width: 100%;position: absolute;
+height: 355px;border-radius: 10px;z-index: -2;">
+<img src="<?php echo $row['cover_pic'] ?>" style="display: <?php echo $row['has_cover'] ?>;object-fit: cover;
 width: 100%;position: absolute;
 height: 355px;border-radius: 10px;z-index: -1;">
   <img src="<?php echo $row['profile_pic'] ?>" alt="Logo" style="width:165px;border: 4px solid #fff;border-radius: 50%;position: absolute;left: 41%;margin-top: 210px;">
   </div>
-<h3><strong><?php echo $row['name'] ?></strong></h3>
+<h2 style="
+    padding-top: 385px;
+    text-align: center;
+vertical-align: middle;font-weight: 490;
+    font-size: 1.78rem;
+"><strong style="
+    font-size: 2rem;
+"><?php echo $row['name'] ?></strong>
+ <span style="display: <?php echo $other_name ?>">(<?php echo $row['other_name'] ?>)</span> <i title="Tài khoản đã xác minh" style="color:#07f;font-size:17px;display:<?php echo $is_veri ?>" class="fas fa-check-circle" data-toggle="tooltip" data-placement="top"></i></h2>
+
+<p style="text-align: center;line-height: 22px;margin-bottom: 0;
+vertical-align: middle;font-size: 1.1rem;color:#65676b;"><?php echo htmlspecialchars($row['about']) ?></p>
+<div style="display:<?php echo $edit ?>;text-align: center;vertical-align: middle;font-weight: 500;">
+<a href="#">Chỉnh sửa</a>
+</div>
+<hr style="margin-top: 10px;">
+<div style="width: 82px;float: left;cursor: pointer;">
+  <span style="color:#1876f2;font-weight: 500;margin-left: 15px;">Bài viết</span>
+  <div style="background-color: #1876f2;height: 3px;margin-top: 14px;"></div>
+</div>
+<div style="width: 100px;display: inline;float: left;color: #65676b;cursor: pointer;">
+  <span style="font-weight: 500;margin-left: 15px;">Giới thiệu</span>
+</div>
+<div style="width: 80px;display: inline;float: left;color: #65676b;cursor: pointer;">
+  <span style="font-weight: 500;margin-left: 15px;">Bạn bè</span>
+</div>
 
 </div>
 <?php
 }
 } else {
   $content = 'block';
+  $back = "none";
 }
 }
+
 ?>
+
 
 <div class="content2" style="
   display: <?php echo $content; ?>;
