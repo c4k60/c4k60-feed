@@ -4,12 +4,24 @@ session_start();
     // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
   $edit = 'none';
+  $editpro = 'none';
+  $addfriend = "none";
+  $doyouknow = "none";
 } else {
 $edit = 'block';
+$editpro = 'inline';
+$addfriend = "inline";
+$doyouknow = "block";
 if ($_SESSION['username'] == str_replace("/","",$_SERVER['REQUEST_URI'])) {
   $edit = 'block';
+  $editpro = 'inline';
+  $addfriend = "none";
+  $doyouknow = "none";
 } else {
   $edit = 'none';
+  $editpro = 'none';
+  $addfriend = "inline";
+  $doyouknow = "block";
 }
 }
 
@@ -94,14 +106,18 @@ if ($result->num_rows > 0) {
     
 
 $back_height = 545;
+$top = 548;
 if ($edit == 'none') {
 $back_height = 520;
+$top = 523;
 } 
 if (empty($row['about'])) {
       $back_height = 490;
+      $top = 493;
     }
     if (empty($row['about']) && $edit == 'block') {
 $back_height = 520;
+$top = 524;
     }
 ?>
 <div style="display: <?php echo $back; ?>;background-color: white;width:100%;height: <?php echo $back_height ?>px;position: absolute;z-index: -3;    -webkit-box-shadow: 0px 0px 3px -1px rgb(0 0 0 / 75%);">
@@ -135,17 +151,202 @@ vertical-align: middle;font-size: 1.1rem;color:#65676b;"><?php echo htmlspecialc
 <div style="display:<?php echo $edit ?>;text-align: center;vertical-align: middle;font-weight: 500;">
 <a href="#">Chỉnh sửa</a>
 </div>
-<hr style="margin-top: 10px;">
-<div style="width: 82px;float: left;cursor: pointer;">
+<hr style="margin-top: 10px;margin-bottom: 10px;">
+<div>
+<div style="width: 82px;float: left;cursor: pointer;padding-top: 6px;">
   <span style="color:#1876f2;font-weight: 500;margin-left: 15px;">Bài viết</span>
   <div style="background-color: #1876f2;height: 3px;margin-top: 14px;"></div>
 </div>
-<div style="width: 100px;display: inline;float: left;color: #65676b;cursor: pointer;">
+<div style="width: 100px;display: inline;float: left;color: #65676b;cursor: pointer;padding-top: 6px;">
   <span style="font-weight: 500;margin-left: 15px;">Giới thiệu</span>
 </div>
-<div style="width: 80px;display: inline;float: left;color: #65676b;cursor: pointer;">
+<div style="width: 80px;display: inline;float: left;color: #65676b;cursor: pointer;padding-top: 6px;">
   <span style="font-weight: 500;margin-left: 15px;">Bạn bè</span>
 </div>
+<div style="width: 60px;display: inline;float: left;color: #65676b;cursor: pointer;padding-top: 6px;">
+  <span style="font-weight: 500;margin-left: 15px;">Ảnh</span>
+</div>
+</div>
+
+<div style="float: right;">
+  <style type="text/css">
+    .editprofile {
+      border-radius: 7px;
+      border: none;
+      transition: 0.3s;
+      background-color: #e4e6eb;
+    }
+    .editprofile:hover{
+      background-color:#cccccc;
+    }
+    .editprofile2 {
+      border-radius: 7px;
+      border: none;
+      transition: 0.3s;
+      background-color: #e7f3ff;
+    }
+    .editprofile2:hover{
+      background-color:#b4c7da;
+    }
+    .editprofile3 {
+      border-radius: 7px;
+      border: none;
+      transition: 0.3s;
+      background-color: #1877f2;
+    }
+    .editprofile3:hover{
+      background-color:#0f53ab;
+    }
+    
+  </style>
+<button class="editprofile" style="
+display: <?php echo $editpro ?>;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    
+    left: 1177px;
+    top: <?php echo $top ?>px;
+"><i class="fas fa-pencil-alt"></i> Chỉnh sửa trang cá nhân</button>
+
+<div style="display: <?php echo $addfriend ?>;">
+<button class="editprofile2" style="
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: #0571ed;
+    padding-left: 15px;
+    padding-right: 15px;font-weight: 500;
+"><i class="fas fa-user-plus"></i> Thêm bạn bè</button>
+<button class="editprofile" style="
+    padding-top: 7px;
+    padding-bottom: 7px;
+    width: 43px;
+"><i class="fas fa-comment"></i></button>
+</div>
+<button class="editprofile" style="
+    padding-top: 7px;
+    padding-bottom: 7px;
+    
+    left: 1388px;
+    top: <?php echo $top ?>px;
+    width: 43px;
+"><i class="fas fa-ellipsis-h"></i></button>
+</div>
+<br><br>
+<div style="background-color: white;padding-top: 10px;padding-left: 15px;padding-bottom: 5px;margin-top: 10px;-webkit-box-shadow: 0px 0px 3px -1px rgb(0 0 0 / 75%);border-radius: 7px;height: 79px;display: <?php echo $doyouknow ?>">
+  <div style="float: left">
+<h4 style="font-size: 1.2rem;font-weight: 700;">Bạn có biết <?php echo $row['name'] ?> không?</h4>
+  <p style="color:#65676b;font-size: 1.1rem;">Hãy gửi lời mời kết bạn để xem những gì anh ấy chia sẻ với bạn bè.</p>
+  </div>
+  <button class="editprofile3" style="
+
+  float: right;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 15px;
+  margin-top: 10px;
+font-weight: 500;
+"><i class="fas fa-user-plus"></i> Thêm bạn bè</button>
+</div>
+<div style="background-color: white;padding-top: 10px;padding-left: 15px;padding-bottom: 15px;margin-top: 12px;-webkit-box-shadow: 0px 0px 3px -1px rgb(0 0 0 / 75%);border-radius: 7px;width: 385px;padding-right: 15px;float: left;">
+  <h5 style="
+    margin-bottom: 12px;
+"><strong>Giới thiệu</strong></h5>
+<p style="margin-bottom: 13px;"><i class="fas fa-graduation-cap" style="color: #8c939d;font-size: 20px;margin-right: 7px;"></i> Học ở <strong style="font-weight: 500;">THPT Chuyên Biên Hoà</strong></p>
+  <p style="margin-bottom: 13px;"><i class="fas fa-home" style="color: #8c939d;font-size: 20px;margin-right: 10px;"></i> Sống tại <strong style="font-weight: 500;">Phủ Lý</strong></p>
+  <p style="margin-bottom: 13px;"><i class="fas fa-map-marker-alt" style="color: #8c939d;font-size: 20px;margin-right: 13px;margin-left: 4px;"></i> Đến từ <strong style="font-weight: 500;">Kim Bảng, Hà Nam</strong></p>
+  <p style="margin-bottom: 13px;"><i class="fas fa-heart" style="color: #8c939d;font-size: 20px;margin-left: 2px;margin-right: 10px;"></i> Độc thân</p>
+<p style="margin-bottom: 13px;"><i class="fas fa-wifi" style="transform: rotate(45deg);color: #8c939d;font-size: 20px;margin-right: 7px;"></i> Có <strong style="font-weight: 500;">81,834 người</strong> theo dõi</p>
+
+<button class="editprofile" style="display: <?php echo $editpro ?>;padding-top: 7px;padding-bottom: 7px;width: 100%;margin-bottom: 15px;">Chỉnh sửa chi tiết</button>
+
+<img src="/images/tunganhhai.jpg" style="
+object-fit: cover;
+width: 100%;
+height: 355px;
+border-radius: 10px;
+border: 1px solid black;
+">
+<button class="editprofile" style="display: <?php echo $editpro ?>;padding-top: 7px;padding-bottom: 7px;width: 100%;margin-top: 15px;">Chỉnh sửa phần Đáng chú ý</button>
+</div>
+<div id="mydiv" style="float: right;background-color: white;padding-top: 10px;padding-left:20px;padding-right: 20px;padding-bottom: 10px;margin-top: 12px;width: 537px;-webkit-box-shadow: 0px 0px 3px -1px rgb(0 0 0 / 75%);border-radius: 7px;">
+  <div>
+<img src="/images/tunna.jpg" style="border-radius: 50%;width: 40px;display: inline-block;">
+
+<div id="textbox" onclick="setTimeout(myFunction2, 2000);" data-toggle="modal" data-target="#myModal" style="display: inline-block;width: 445px;margin-left: 5px;height: 41px;padding-top: 8px;border-radius: 20px;padding-left: 13px;transition: 0.3s;cursor: pointer;">Bạn đang nghĩ gì vậy, Tùng Anh?</div>
+<style type="text/css">
+  #textbox{
+    background-color: #f0f2f5
+
+   }
+  #textbox:hover{
+
+    background-color: #e6e6e6
+   }
+</style>
+<hr style="margin-top: 10px;margin-bottom: 8px;">
+</div>
+<div id="butto1" style="
+    height: 40px;
+    width: 243px;
+    padding-top: 8px;
+    position: absolute;
+    float: left;
+    border-radius: 7px;
+    transition: 0.3s;
+    cursor: pointer;
+">
+<div style="
+  width: auto;
+  padding: 0 70px;
+  height: 100%;
+  width: 240px;
+  float: left;
+  text-align: left;
+  color: #65676b;
+  ">
+ 
+<i class="fas fa-images" style="color: #45bd62"></i> Ảnh/Video
+  </div>
+</div>
+<div id="butto2" style="height: 40px;width: 250px;padding-top: 8px;border-radius: 7px;float: right;transition: 0.3s;cursor: pointer;">
+  <div style="width: auto;
+  padding: 0 42px;
+  height: 100%;
+  float: right;
+  text-align: left;
+ color: #65676b">
+<i class="fas fa-smile" style="color: #f7b928"></i> Cảm xúc/Hoạt động
+</div>
+  </div>
+  <style type="text/css">
+   #butto1:hover{
+    background-color: #f0f2f5
+   }
+   #butto2:hover{
+    background-color: #f0f2f5
+   }
+   #butto1:active{
+    background-color: #c3c3c3
+   }
+   #butto2:active{
+    background-color: #c3c3c3
+   }
+
+ </style>
+</div>
+
+<center>
+  <br>
+  <img src="/images/pingpong.png" style="
+    height: 97px;
+    margin-top: 40px;
+">
+  <br><br>
+<p style="color: grey">Có vẻ như không còn bài viết nào.</p>
+</center>
 
 </div>
 <?php

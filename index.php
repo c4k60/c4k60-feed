@@ -520,7 +520,7 @@ height: 40px;
 
 <div id="newsfeed">
 <?php
-$sql = "SELECT id, author, content, timeofpost, image, has_image, avatar FROM tintuc_posts ORDER BY id DESC";
+$sql = "SELECT id, author, content, username, timeofpost, image, has_image, avatar FROM tintuc_posts ORDER BY id DESC";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
  // output data of each row
@@ -530,9 +530,7 @@ if (mysqli_num_rows($result) > 0) {
 <div id='mydiv' style='background-color: white;padding-top: 10px;padding-left: 0px;padding-right: 0px;padding-bottom: 5px;margin-top: 20px;'>
   <img src='<?php echo $row['avatar']; ?>' style='border-radius: 50%;width: 40px;display: inline-block;position: absolute;margin-left: 15px;'>
   <div style='display: inline-block;margin-left: 65px;'>
-  <p style='
-    margin-bottom: 0px;
-'><strong style=''><?php echo $row['author']; ?> <i title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:none;display:inline' class='fas fa-check-circle'></i></strong></p><p style='position: absolute;font-size: 12px;color:#9e9b9b'>
+  <a href="/<?php echo $row['username'] ?>" style="color: black;"><strong style=''><?php echo $row['author']; ?> <i title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:none;display:inline' class='fas fa-check-circle'></i></strong></a><p style='position: absolute;font-size: 12px;color:#9e9b9b'>
   <a id="concac<?php echo $row['id']; ?>" href='post.php?id=<?php echo $row['id']; ?>' style='color: #9e9b9b'></a> · <i class='fas fa-globe-americas'></i></p>
 <script type="text/javascript">
   document.getElementById('concac<?php echo $row['id']; ?>').innerHTML = moment('<?php echo $row['timeofpost']; ?>', 'YYYY-MM-DD h:m:s').fromNow();
@@ -764,9 +762,7 @@ margin-left: 0px;
 <div id="post1" style="background-color: white;padding-top: 10px;padding-left: 0px;padding-right: 0px;padding-bottom: 5px;margin-top: 20px;">
   <img src="/images/phatdeptrai.jpg" style="border-radius: 50%;width: 40px;display: inline-block;position: absolute;margin-left: 15px;">
   <div style="display: inline-block;margin-left: 65px;">
-  <p style="
-    margin-bottom: 0px;
-"><strong style="">Hoàng Phát <i id='tunganh2' title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:none;display:inline' class='fas fa-check-circle'></i></strong></p><p style="position: absolute;font-size: 12px;color:#9e9b9b">
+  <a href="/hoangphat" style="color: black;"><strong style="">Hoàng Phát <i id='tunganh2' title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:none;display:inline' class='fas fa-check-circle'></i></strong></a><p style="position: absolute;font-size: 12px;color:#9e9b9b">
   <a href="post.php?id=1015" id="concac" style="color: #9e9b9b"></a> · <i class="fas fa-globe-americas"></i></p>
 <script type="text/javascript">
   document.getElementById('concac').innerHTML = moment('2020-11-23 15:03:22', 'YYYY-MM-DD h:m:s').fromNow();
@@ -999,6 +995,7 @@ margin-left: 0px;
 
 
 
+
 </div>
 <!-- The Modal -->
 <div class="modal" id="myModal" >
@@ -1051,16 +1048,7 @@ margin-left: 0px;
 </div>
 
 <form id="myform" action="index.php" method="POST" enctype=multipart/form-data>
-<?php
-if (empty($_SESSION['username'])){
-$_SESSION['username'] = "tunnaduong";
-}
-if (empty($_SESSION['name'])){
-$_SESSION['name'] = "Dương Tùng Anh";
-}
-$_SESSION['username'] = "tunnaduong";
-$_SESSION['name'] = "Dương Tùng Anh";
-?>
+
   <input type="hidden" id="avatar" name="avatar" value="/images/tunna.jpg">
   <input type="hidden" id="username" name="username" value="<?=$_SESSION['username']?>">
   <input type="hidden" id="name" name="name" value="<?=$_SESSION['name']?>">
