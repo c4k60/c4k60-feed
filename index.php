@@ -4,11 +4,6 @@ session_start();
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
   header('Location: /login');
-
-} else {
-
-
-
 }
 ?>
 <?php
@@ -22,111 +17,13 @@ if (isset($_GET['action'])) {
 $conn->query($sql);
  }
 }
+require $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<title>C4K60 - Tin tức</title>
-<!-- Bộ mã Bootstrap 4 -->
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bộ mã jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<!-- Bộ mã JavaScript cho Bootstrap 4 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- Bộ mã Font Awesome -->
- <script src="https://kit.fontawesome.com/5468db3c8c.js" crossorigin="anonymous"></script>
-<!-- Moment JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/vi.min.js"></script>
-<link rel="icon" type="image/png" href="c4k60.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
 
 <body style="background-color: #f0f2f5;">
-<nav class="navbar navbar-expand-md bg-warning navbar-light fixed-top">
-	<a class="navbar-brand" href="/">
-    <img src="/images/c4k60.png" alt="Logo" style="width:40px;">
-  </a>
-  <ul class="navbar-nav mr-auto">
-    
-    <form class="form-inline" action="/action_page.php">
-    <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm">
-    <button class="btn btn-success" type="submit" style="background-color:#e4562b85;border-color:#e4562b85"><i class="fas fa-search"></i></button>
-  </form>
-    
-  </ul>
-   <ul class="navbar-nav">
-  
-  <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-user-plus"></i></a>
-    </li>
-    <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-comment"></i></a>
-    </li>
-    <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-globe-americas"></i></a>
-    </li>
-    <style>
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  right: 0;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.show {display: block;}
-</style>
-    <div class="dropdown">
-  <a class="navbar-brand">
-    <img src="/images/tunna.jpg" onclick="profileDropdown()" class="dropbtn" alt="Logo" style="width:40px;border-radius: 50%;margin-left: 10px;cursor: pointer;">
-  </a>
-<div id="myDropdowns" class="dropdown-content">
-    <a href="/<?php echo $_SESSION['username'] ?>"><i class="fas fa-user-circle" style="margin-right: 6px;"></i> Trang cá nhân</a>
-    <a href="#about"><i class="fas fa-cog" style="margin-right: 6px;"></i> Cài đặt</a>
-    <a href="logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 6px;"></i> Đăng xuất</a>
-  </div>
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function profileDropdown() {
-  document.getElementById("myDropdowns").classList.add("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
-</div>
-
-</ul>
-</nav>
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/include/navbar.php';
+?>
 <style type="text/css">
   .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -520,7 +417,7 @@ height: 40px;
 
 <div id="newsfeed">
 <?php
-$sql = "SELECT id, author, content, username, timeofpost, image, has_image, avatar FROM tintuc_posts ORDER BY id DESC";
+$sql = "SELECT id, author, content, username, timeofpost, image, has_image, avatar, c4id FROM tintuc_posts ORDER BY id DESC";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
  // output data of each row
@@ -628,8 +525,10 @@ window.onclick = function(event) {
 '><?php echo $row['content']; ?></p>
 
 </div>
+<a href="/photo?id=<?php echo $row['c4id'] ?>">
 <img src='<?php echo $row['image'] ?>' style='width: 600px;margin-bottom: 0px;cursor: pointer;display: <?php echo $row['has_image'] ?>;
 '>
+</a>
  <style type='text/css'>
     .unlike {
       color: #65676b;
@@ -1121,7 +1020,7 @@ if(!empty($_POST)) {
  date_default_timezone_set('Asia/Ho_Chi_Minh');
  $time = date('Y-m-d H:i:s');
  $avatar = $_POST['avatar'];
- $image = "images/". $_FILES['userfile']['name']."";
+ $image = "/images/". $_FILES['userfile']['name']."";
  $username2 = $_POST['username'];
  if (!empty($_FILES['userfile']['name'])){
     $has_image = 'block';
@@ -1142,15 +1041,25 @@ if(!empty($_POST)) {
  }
  if(empty($errors)){
    move_uploaded_file($file_tmp,'images/'.$file_name);
-  $sql = "INSERT INTO tintuc_posts (author, content, timeofpost, has_comment, avatar, has_image, image, username)
-VALUES ('$name', '$email', '$time', 'no', '$avatar', '$has_image', ' $image', '$username2')";
-
+   if ($image != "/images/") {
+   $c4id = rand(10000, 99999);
+ } else {
+  $c4id = 0;
+ }
+  $sql = "INSERT INTO tintuc_posts (author, content, timeofpost, has_comment, avatar, has_image, image, username, c4id)
+VALUES ('$name', '$email', '$time', 'no', '$avatar', '$has_image', ' $image', '$username2', '$c4id')
+";
+$sql2 = "INSERT INTO images_upload (c4id, username, filename, time_of_upload, caption) VALUES ('$c4id', '$username2', '$image', '$time', '$email')";
 if (mysqli_query($conn, $sql)) {
  echo "<script>console.log('Lệnh SQL thực thi thành công');";
 } else {
  echo "Error: " . $sql . "" . mysqli_error($conn);
 }
-$con->close();  
+if ($image != "/images/") {
+mysqli_query($conn, $sql2);
+}
+
+$conn->close();  
    
    echo "console.log('Upload ảnh thành công');</script>";
  }else{
