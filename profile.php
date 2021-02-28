@@ -29,64 +29,23 @@ if ($_SESSION['username'] == str_replace("/","",$_SERVER['REQUEST_URI'])) {
 }
 }
 
-
+$tieude = "Trang cá nhân";
+require $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/include/navbar.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<title>C4K60 - Tin tức</title>
-<!-- Bộ mã Bootstrap 4 -->
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bộ mã jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<!-- Bộ mã JavaScript cho Bootstrap 4 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- Bộ mã Font Awesome -->
- <script src="https://kit.fontawesome.com/5468db3c8c.js" crossorigin="anonymous"></script>
-<!-- Moment JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/vi.min.js"></script>
-<link rel="icon" type="image/png" href="c4k60.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+
+
+<body style="background-color: #f0f2f5;">
+
+
 <style type="text/css">
   .content {
     width: 940px;
     margin: 0 auto;
   }
 </style>
-<body style="background-color: #f0f2f5;">
-<nav class="navbar navbar-expand-md bg-warning navbar-light fixed-top">
-	<a class="navbar-brand" href="/">
-    <img src="/images/c4k60.png" alt="Logo" style="width:40px;">
-  </a>
-  <ul class="navbar-nav mr-auto">
-    
-    <form class="form-inline" action="/action_page.php">
-    <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm">
-    <button class="btn btn-success" type="submit" style="background-color:#e4562b85;border-color:#e4562b85"><i class="fas fa-search"></i></button>
-  </form>
-    
-  </ul>
-   <ul class="navbar-nav">
-  
-  <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-user-plus"></i></a>
-    </li>
-    <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-comment"></i></a>
-    </li>
-    <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-globe-americas"></i></a>
-    </li>
-  <a class="navbar-brand" href="/">
-    <img src="/images/tunna.jpg" alt="Logo" style="width:40px;border-radius: 50%;margin-left: 10px;">
-  </a>
-</ul>
-</nav>
 <?php
-$content = "none";
+$content2 = "none";
 $back = 'block';
 require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
 if (isset($_GET['username'])) {
@@ -323,7 +282,7 @@ font-weight: 500;
   <p style="margin-bottom: 13px;display: <?php echo $live_in ?>"><i class="fas fa-home" style="color: #8c939d;font-size: 20px;margin-right: 10px;"></i> Sống tại <strong style="font-weight: 500;"><?php echo $row['live_in'] ?></strong></p>
   <p style="margin-bottom: 13px;display: <?php echo $location ?>"><i class="fas fa-map-marker-alt" style="color: #8c939d;font-size: 20px;margin-right: 13px;margin-left: 4px;"></i> Đến từ <strong style="font-weight: 500;"><?php echo $row['location'] ?></strong></p>
   <p style="margin-bottom: 13px;display: <?php echo $relationship ?>"><i class="fas fa-heart" style="color: #8c939d;font-size: 20px;margin-left: 2px;margin-right: 10px;"></i> <?php echo $row['relationship'] ?></p>
-<p style="margin-bottom: 13px;display: <?php echo $followers ?>"><i class="fas fa-wifi" style="transform: rotate(45deg);color: #8c939d;font-size: 20px;margin-right: 7px;"></i> Có <strong style="font-weight: 500;"><?php echo number_format($row['followers']); ?> người</strong> theo dõi</p>
+<p style="margin-bottom: 13px;display: <?php echo $followers ?>"><i class="fas fa-wifi" style="transform: rotate(45deg);color: #8c939d;font-size: 20px;margin-right: 7px;"></i> Có <strong style="font-weight: 500;"><?php echo number_format($row['followers'],0,".","."); ?> người</strong> theo dõi</p>
 
 <button class="editprofile" style="display: <?php echo $editpro ?>;padding-top: 7px;padding-bottom: 7px;width: 100%;margin-bottom: 15px;">Chỉnh sửa chi tiết</button>
 
@@ -350,11 +309,11 @@ display: <?php echo $hphoto ?>
 <p style="color:#65676b;font-size: 0.8rem;"><a href="/privacy" style="color:#65676b;">Quyền riêng tư</a> · <a href="/ads" style="color:#65676b;">Quảng cáo</a> · <a href="/about" style="color:#65676b;">Giới thiệu</a> · <a href="/help" style="color:#65676b;">Trợ giúp</a> · C4K60 © 2021</p>
 </div>
 
-<div id="mydiv" style="float: right;background-color: white;padding-top: 10px;padding-left:20px;padding-right: 20px;padding-bottom: 10px;margin-top: 12px;width: 537px;-webkit-box-shadow: 0px 0px 3px -1px rgb(0 0 0 / 75%);border-radius: 7px;margin-bottom: 20px;display: <?php echo $edit ?>">
+<div id="mydiv" style="float: right;background-color: white;padding-top: 10px;padding-left:20px;padding-right: 20px;padding-bottom: 10px;margin-top: 12px;width: 537px;-webkit-box-shadow: 0px 0px 3px -1px rgb(0 0 0 / 75%);border-radius: 7px;margin-bottom: 5px;display: <?php echo $edit ?>">
   <div>
-<img src="/images/tunna.jpg" style="border-radius: 50%;width: 40px;display: inline-block;">
+<img src="<?php echo $_SESSION['profile_pic'] ?>" style="border-radius: 50%;width: 40px;display: inline-block;">
 
-<div id="textbox" onclick="setTimeout(myFunction2, 2000);" data-toggle="modal" data-target="#myModal" style="display: inline-block;width: 445px;margin-left: 5px;height: 41px;padding-top: 8px;border-radius: 20px;padding-left: 13px;transition: 0.3s;cursor: pointer;">Bạn đang nghĩ gì vậy, Tùng Anh?</div>
+<div id="textbox" onclick="setTimeout(myFunction2, 2000);" data-toggle="modal" data-target="#myModal" style="display: inline-block;width: 445px;margin-left: 5px;height: 41px;padding-top: 8px;border-radius: 20px;padding-left: 13px;transition: 0.3s;cursor: pointer;">Bạn đang nghĩ gì?</div>
 <style type="text/css">
   #textbox{
     background-color: #f0f2f5
@@ -434,16 +393,16 @@ if (mysqli_num_rows($result) > 0) {
     padding-left: 0px;
     padding-right: 0px;
     padding-bottom: 5px;
-    margin-top: 0px;
+    margin-top: 11px;
     -webkit-box-shadow: 0px 0px 3px -1px rgb(0 0 0 / 75%);
     border-radius: 7px;
     width: 537px;
     float: right;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
     '>
   <img src='<?php echo $row['avatar']; ?>' style='border-radius: 50%;width: 40px;display: inline-block;position: absolute;margin-left: 15px;'>
   <div style='display: inline-block;margin-left: 65px;'>
-  <a href="/<?php echo $row['username'] ?>" style="color: black;"><strong><?php echo $row['author']; ?> <i title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:none;display:inline' class='fas fa-check-circle'></i></strong></a>
+  <a href="/<?php echo $row['username'] ?>" style="color: black;"><strong><?php echo $row['author']; ?> <i title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:<?php echo $is_veri ?>' class='fas fa-check-circle'></i></strong></a>
   <p style='position: absolute;font-size: 12px;color:#9e9b9b'>
   <a id="concac<?php echo $row['id']; ?>" href='post.php?id=<?php echo $row['id']; ?>' style='color: #9e9b9b'></a> · <i class='fas fa-globe-americas'></i></p>
 <script type="text/javascript">
@@ -581,7 +540,7 @@ window.onclick = function(event) {
     margin-left: 9px;
 '></i>
 </span>
-<p style='display: inline;color: #65676b;'>Dương Tùng Anh</p>
+<p style='display: inline;color: #65676b;'><?php echo $_SESSION['name'] ?></p>
 </div>
 <div id='reaction1' class='noselect'>
  
@@ -637,7 +596,7 @@ window.onclick = function(event) {
 
 
 <div id='textbox2' style='display: inline-block;width: 530px;height: 41px;border-radius: 20px;transition: 0.3s;'>
-<img src='/images/tunna.jpg' style='border-radius: 50%;width: 40px;float:left;margin-left: 20px;'>
+<img src='<?php echo $_SESSION['profile_pic'] ?>' style='border-radius: 50%;width: 40px;float:left;margin-left: 20px;'>
   <textarea class='commentar' id='comment<?php echo $row['id']; ?>' placeholder='Viết một bình luận...' style='border:none;outline: none;resize: none;overflow: auto;border-radius: 24px;width: 387px;height: 40px;margin-left: 9px;padding-top: 7px;background-color: #f0f2f5;padding-left: 15px;'></textarea>
 <i class='fas fa-camera' style='float: right;margin-right: 15px;margin-top: 12px;cursor: pointer;'></i>
 <i class='far fa-smile' style='float: right;margin-right: 15px;margin-top: 12px;cursor: pointer;'></i>
@@ -657,12 +616,34 @@ window.onclick = function(event) {
 <?php
 }
 } else {
-  $content = 'block';
+  $content2 = "block";
   $back = "none";
 }
 }
 
 ?>
+
+<div class="content2" style="
+display: <?php echo $content2 ?>;
+    position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+">
+<center>
+<img src="/images/404.svg" style="
+    width: 110px;
+">
+<h4 style="color: #64676b">Nội dung bạn truy cập không có sẵn!</h4>
+<p style="color: #64676b">Liên kết có thể bị hỏng hoặc trang có thể đã bị xóa.<br> Hãy thử kiểm tra xem liên kết bạn đang cố mở có <br>chính xác không.</p>
+<button type="button" class="btn btn-primary" style="
+    width: 186px;
+    margin-bottom: 10px;
+" onclick="location.href = '/';">Đi đến bảng tin</button><br>
+<a href="#" onclick="window.history.back();">Quay lại</a><br>
+</center>
+</div>
 <!-- The Modal -->
 <div class="modal" id="myModal" >
   <div class="modal-dialog">
@@ -681,11 +662,11 @@ window.onclick = function(event) {
     height: 297px;
 ">
 <div id="createpost" style="display: none;">
-   <img src="/images/tunna.jpg" style="border-radius: 50%;width: 40px;display: inline-block;position: absolute;margin-top: 5px;">
+   <img src="<?php echo $_SESSION['profile_pic'] ?>" style="border-radius: 50%;width: 40px;display: inline-block;position: absolute;margin-top: 5px;">
   <div style="display: inline-block;margin-left: 52px;">
   <p style="
     margin-bottom: 0px;
-"><strong style="">Dương Tùng Anh</strong></p>
+"><strong style=""><?php echo $_SESSION['name'] ?></strong></p>
 <div id="butto55" style="
     height: 21px;
     width: 83.11687px;
@@ -715,7 +696,7 @@ window.onclick = function(event) {
 
 <form id="myform" action="index.php" method="POST" enctype=multipart/form-data>
 
-  <input type="hidden" id="avatar" name="avatar" value="/images/tunna.jpg">
+  <input type="hidden" id="avatar" name="avatar" value="<?php echo $_SESSION['profile_pic'] ?>">
   <input type="hidden" id="username" name="username" value="<?=$_SESSION['username']?>">
   <input type="hidden" id="name" name="name" value="<?=$_SESSION['name']?>">
 <div id="textbox2" onkeyup="success()" style="display: inline-block;width: 530px;height: 41px;border-radius: 20px;transition: 0.3s;margin-top: 28px;"><textarea class="commentar" id="postcontent" name="postcontent" placeholder="Bạn đang nghĩ gì?" style="border: none;outline: none;resize: none;overflow: auto;width: 567px;height: 160px;padding-top: 7px;background-color: white;padding-left: 0px;font-size: 25px;"></textarea>
@@ -879,28 +860,6 @@ function myFunction2() {
 </form>
  </div>
 
-
-<div class="content2" style="
-  display: <?php echo $content; ?>;
-    position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-">
-<center>
-<img src="/images/404.svg" style="
-    width: 110px;
-">
-<h4 style="color: #64676b">Nội dung bạn truy cập không có sẵn!</h4>
-<p style="color: #64676b">Liên kết có thể bị hỏng hoặc trang có thể đã bị xóa.<br> Hãy thử kiểm tra xem liên kết bạn đang cố mở có <br>chính xác không.</p>
-<button type="button" class="btn btn-primary" style="
-    width: 186px;
-    margin-bottom: 10px;
-" onclick="location.href = '/';">Đi đến bảng tin</button><br>
-<a href="/">Quay lại</a><br>
-</center>
-</div>
 
 
 </body>

@@ -25,14 +25,14 @@ if ( !isset($_POST['username'], $_POST['password']) ) {
 	$error = 'Please fill both the username and password field!';
 }
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT id, password, email, name, permission, oauth_provider FROM accounts WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT id, password, email, name, permission, oauth_provider, profile_pic FROM accounts WHERE username = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();
 	// Store the result so we can check if the account exists in the database.
 	$stmt->store_result();
 	if ($stmt->num_rows > 0) {
-	$stmt->bind_result($id, $password, $email, $name, $permission, $oauth);
+	$stmt->bind_result($id, $password, $email, $name, $permission, $oauth, $profile_pic);
 	$stmt->fetch();
 	// Account exists, now we verify the password.
 	// Note: remember to use password_hash in your registration file to store the hashed passwords.
@@ -47,6 +47,7 @@ if ($stmt = $con->prepare('SELECT id, password, email, name, permission, oauth_p
 		$_SESSION['name'] = $name;
     $_SESSION['permission'] = $permission;
     $_SESSION['oauth'] = $oauth;
+    $_SESSION['profile_pic'] = $profile_pic;
 
 		if ($_SESSION['permission'] == 'admin') { // nếu id = 11
     header('Location: /'); // chuyển đến trang admin

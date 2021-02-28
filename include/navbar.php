@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-warning navbar-light fixed-top">
+<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #f6e100">
 	<a class="navbar-brand" href="/">
     <img src="/images/c4k60.png" alt="Logo" style="width:40px;">
   </a>
@@ -54,7 +54,7 @@ border-radius: 10px;
 </style>
     <div class="dropdown">
   <a class="navbar-brand">
-    <img src="/images/tunna.jpg" onclick="profileDropdown()" class="dropbtn" alt="Logo" style="width:40px;border-radius: 50%;margin-left: 10px;cursor: pointer;">
+    <img src="<?=$_SESSION['profile_pic']?>" onclick="profileDropdown()" class="dropbtn" alt="Logo" style="width:40px;border-radius: 50%;margin-left: 10px;cursor: pointer;">
   </a>
 <div id="myDropdowns" class="dropdown-content">
     <a href="/<?php echo $_SESSION['username'] ?>"><i class="fas fa-user-circle" style="margin-right: 6px;"></i> Trang cá nhân</a>

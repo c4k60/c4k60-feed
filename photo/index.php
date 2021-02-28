@@ -186,6 +186,6 @@ $content = "block";
     width: 186px;
     margin-bottom: 10px;
 " onclick="location.href = '/';">Đi đến bảng tin</button><br>
-<a href="/">Quay lại</a><br>
+<a href="#" onclick="window.history.back();">Quay lại</a><br>
 </center>
 </div>

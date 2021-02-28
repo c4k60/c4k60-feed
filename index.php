@@ -418,17 +418,22 @@ height: 40px;
 
 <div id="newsfeed">
 <?php
-$sql = "SELECT id, author, content, username, timeofpost, image, has_image, avatar, c4id FROM tintuc_posts ORDER BY id DESC";
+$sql = "SELECT tintuc_posts.id, tintuc_posts.author, tintuc_posts.content, tintuc_posts.username, tintuc_posts.timeofpost, tintuc_posts.image, tintuc_posts.has_image, tintuc_posts.avatar, tintuc_posts.c4id, accounts.verified FROM tintuc_posts INNER JOIN accounts ON tintuc_posts.username = accounts.username ORDER BY id DESC";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
  // output data of each row
  while($row = mysqli_fetch_assoc($result)) {
+  if ($row['verified'] == 'yes') {
+      $is_veri = 'inline';
+    } else {
+      $is_veri = 'none';
+    }
  ?>
 
 <div id='mydiv' style='background-color: white;padding-top: 10px;padding-left: 0px;padding-right: 0px;padding-bottom: 5px;margin-top: 20px;'>
   <img src='<?php echo $row['avatar']; ?>' style='border-radius: 50%;width: 40px;display: inline-block;position: absolute;margin-left: 15px;'>
   <div style='display: inline-block;margin-left: 65px;'>
-  <a href="/<?php echo $row['username'] ?>" style="color: black;"><strong style=''><?php echo $row['author']; ?> <i title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:none;display:inline' class='fas fa-check-circle'></i></strong></a><p style='position: absolute;font-size: 12px;color:#9e9b9b'>
+  <a href="/<?php echo $row['username'] ?>" style="color: black;"><strong style=''><?php echo $row['author']; ?> <i title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:<?php echo $is_veri ?>' class='fas fa-check-circle'></i></strong></a><p style='position: absolute;font-size: 12px;color:#9e9b9b'>
   <a id="concac<?php echo $row['id']; ?>" href='post.php?id=<?php echo $row['id']; ?>' style='color: #9e9b9b'></a> · <i class='fas fa-globe-americas'></i></p>
 <script type="text/javascript">
   document.getElementById('concac<?php echo $row['id']; ?>').innerHTML = moment('<?php echo $row['timeofpost']; ?>', 'YYYY-MM-DD h:m:s').fromNow();
@@ -565,7 +570,7 @@ window.onclick = function(event) {
     margin-left: 9px;
 '></i>
 </span>
-<p style='display: inline;color: #65676b;'>Dương Tùng Anh</p>
+<p style='display: inline;color: #65676b;'><?php echo $_SESSION['name'] ?></p>
 </div>
 <div id='reaction1' class='noselect'>
  
@@ -640,7 +645,7 @@ margin-left: 0px;
    margin-left: 15px;
    margin-right: 15px;
 '>
-<img src='/images/tunna.jpg' style='border-radius: 50%;width: 40px;float:left;margin-left: 20px;'>
+<img src='<?php echo $_SESSION['profile_pic'] ?>' style='border-radius: 50%;width: 40px;float:left;margin-left: 20px;'>
 
 <div id='textbox2' style='display: inline-block;width: 530px;height: 41px;border-radius: 20px;transition: 0.3s;'><textarea class='commentar' id='comment<?php echo $row['id']; ?>' placeholder='Viết một bình luận...' style='border:none;outline: none;resize: none;overflow: auto;border-radius: 24px;width: 445px;height: 40px;margin-left: 9px;padding-top: 7px;background-color: #f0f2f5;padding-left: 15px'></textarea>
 <i class='fas fa-camera' style='float: right;margin-right: 15px;margin-top: 12px;cursor: pointer;'></i>
@@ -662,7 +667,7 @@ margin-left: 0px;
 <div id="post1" style="background-color: white;padding-top: 10px;padding-left: 0px;padding-right: 0px;padding-bottom: 5px;margin-top: 20px;">
   <img src="/images/phatdeptrai.jpg" style="border-radius: 50%;width: 40px;display: inline-block;position: absolute;margin-left: 15px;">
   <div style="display: inline-block;margin-left: 65px;">
-  <a href="/hoangphat" style="color: black;"><strong style="">Hoàng Phát <i id='tunganh2' title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:none;display:inline' class='fas fa-check-circle'></i></strong></a><p style="position: absolute;font-size: 12px;color:#9e9b9b">
+  <a href="/hoangphat" style="color: black;"><strong style="">Hoàng Phát <i id='tunganh2' title='Tài khoản đã xác minh' style='color:#07f;font-size:14px;display:none;' class='fas fa-check-circle'></i></strong></a><p style="position: absolute;font-size: 12px;color:#9e9b9b">
   <a href="post.php?id=1015" id="concac" style="color: #9e9b9b"></a> · <i class="fas fa-globe-americas"></i></p>
 <script type="text/javascript">
   document.getElementById('concac').innerHTML = moment('2020-11-23 15:03:22', 'YYYY-MM-DD h:m:s').fromNow();
