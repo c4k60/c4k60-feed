@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>C4K60 - Tin tức</title>
+<title>C4K60 Feed - <?=$tieude?></title>
 <!-- Bộ mã Bootstrap 4 -->
  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bộ mã jQuery -->

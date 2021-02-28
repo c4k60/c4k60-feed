@@ -17,6 +17,7 @@ if (isset($_GET['action'])) {
 $conn->query($sql);
  }
 }
+$tieude = "Trang chủ";
 require $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
 ?>
 

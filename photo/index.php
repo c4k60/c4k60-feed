@@ -1,63 +1,9 @@
 <?php
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
-
-?>
-<!DOCTYPE html>
-<html>
-<head>
-<title>C4K60 - Tin tức</title>
-<!-- Bộ mã Bootstrap 4 -->
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bộ mã jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<!-- Bộ mã JavaScript cho Bootstrap 4 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- Bộ mã Font Awesome -->
- <script src="https://kit.fontawesome.com/5468db3c8c.js" crossorigin="anonymous"></script>
-<!-- Moment JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/vi.min.js"></script>
-<link rel="icon" type="image/png" href="/c4k60.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<style type="text/css">
-  .content {
-    width: 940px;
-    margin: 0 auto;
-  }
-</style>
-<body>
-<nav class="navbar navbar-expand-md bg-warning navbar-light fixed-top">
-	<a class="navbar-brand" href="/">
-    <img src="/images/c4k60.png" alt="Logo" style="width:40px;">
-  </a>
-  <ul class="navbar-nav mr-auto">
-    
-    <form class="form-inline" action="/action_page.php">
-    <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm">
-    <button class="btn btn-success" type="submit" style="background-color:#e4562b85;border-color:#e4562b85"><i class="fas fa-search"></i></button>
-  </form>
-    
-  </ul>
-   <ul class="navbar-nav">
-  
-  <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-user-plus"></i></a>
-    </li>
-    <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-comment"></i></a>
-    </li>
-    <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-globe-americas"></i></a>
-    </li>
-  <a class="navbar-brand" href="/">
-    <img src="/images/tunna.jpg" alt="Logo" style="width:40px;border-radius: 50%;margin-left: 10px;">
-  </a>
-</ul>
-</nav>
-<?php
+$tieude = "Ảnh";
+require $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/include/navbar.php';
 $content = "none";
 require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
 if (isset($_GET['id'])) {
@@ -75,7 +21,7 @@ if ($result->num_rows > 0) {
 	}
 </style>
 <div style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;width: 1500px;margin-top: 65px;">
-<img src="<?php echo $row['filename'] ?>" style="position: absolute;margin: auto;top: 0;left: 0;right: 0;bottom: 0;height: 800px;">
+<img src="<?php echo $row['filename'] ?>" style="position: absolute;margin: auto;top: 0;left: 0;right: 0;bottom: 0;max-height: 800px;">
 </div>
 <div style="float: right;background-color: white;width: 420px;height: 1000px;margin-top: 65px;">
 	<div style="margin-top: 15px">

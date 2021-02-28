@@ -36,6 +36,7 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   right: 0;
+  border-radius: 10px;
 }
 
 .dropdown-content a {
@@ -43,6 +44,10 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;
+border-radius: 10px;
 }
 
 .show {display: block;}
@@ -54,7 +59,7 @@
 <div id="myDropdowns" class="dropdown-content">
     <a href="/<?php echo $_SESSION['username'] ?>"><i class="fas fa-user-circle" style="margin-right: 6px;"></i> Trang cá nhân</a>
     <a href="#about"><i class="fas fa-cog" style="margin-right: 6px;"></i> Cài đặt</a>
-    <a href="logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 6px;"></i> Đăng xuất</a>
+    <a href="/logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 6px;"></i> Đăng xuất</a>
   </div>
 <script>
 /* When the user clicks on the button, 
