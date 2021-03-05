@@ -16,7 +16,7 @@
  <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-user-plus"></i></a>
     </li>
     <li class="nav-item">
- <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-comment"></i></a>
+ <a class="nav-link" href="/messages" style="font-size: 1.4rem;"><i class="fas fa-comment"></i></a>
     </li>
     <li class="nav-item">
  <a class="nav-link" href="#" style="font-size: 1.4rem;"><i class="fas fa-globe-americas"></i></a>
